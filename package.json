@@ -1,0 +1,20 @@
+{
+  "name": "spark",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spark-js/spark.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spark-js/spark/issues"
+  },
+  "homepage": "https://github.com/spark-js/spark#readme",
+  "dependencies": {
+    "preact": "^8.1.0"
+  }
+}
