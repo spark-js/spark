@@ -16,5 +16,15 @@
   "homepage": "https://github.com/spark-js/spark#readme",
   "dependencies": {
     "preact": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.23",
+    "@types/webpack": "^2.2.15",
+    "ts-loader": "^2.1.0",
+    "ts-node": "^3.0.4",
+    "tslint": "^5.4.2",
+    "typescript": "^2.3.4",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "webpack": "^2.6.1"
   }
 }

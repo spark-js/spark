@@ -1,23 +1,4 @@
-import { CustomElement } from './common';
-
 import { h, render } from 'preact';
-
-// export function Component<TBase extends CustomElement>(Base: TBase) {
-//     return class extends Base {
-//         constructor(...args: any[]) {
-//             super();
-//             if (!this.shadowRoot) {
-//                 this.attachShadow({ mode: 'open' });
-//             }
-//         }
-
-//         render(): any {
-
-//         }
-
-//     }
-// }
-
 
 export abstract class CustomComponent extends HTMLElement {
 
