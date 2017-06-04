@@ -1,11 +1,5 @@
-import { h, CustomComponent } from '../dist';
+import { CustomElement } from '../src/component';
+@CustomElement('x-component')
+class MyComponent extends HTMLElement {
 
-class MySecondComponent extends CustomComponent {
-    template () {
-        return (
-            <div>
-                Hello
-            </div>
-        );
-    }
 }
