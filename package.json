@@ -9,8 +9,8 @@
     "bundle": "webpack -p",
     "tsc": "tsc",
     "tsc:watch": "tsc -w",
-    "example": "webpack --config webpack.example.js",
-    "del": "del-cli \"lib\" \"dist\" \"example/bundle\"",
+    "dev": "webpack --config webpack.dev.js",
+    "del": "del-cli \"lib\" \"dist\" \"dev/bundle\"",
     "pretsc": "npm run del",
     "pretsc:watch": "npm run del"
   },

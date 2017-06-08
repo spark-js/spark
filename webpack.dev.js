@@ -12,12 +12,12 @@ module.exports = function webpackConfig(env = {}) {
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
             alias: {
-                spark: path.resolve(__dirname, 'lib')
+                spark: path.resolve(__dirname, 'src')
             }
         },
         module: {
             rules: [{
-                test: /\.tsx$/,
+                test: /\.ts(x)?$/,
                 exclude: [
                     'node_modules'
                 ],

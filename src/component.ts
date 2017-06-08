@@ -7,8 +7,10 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
              *
              */
             constructor(...args: any[]) {
-                super();
-                this.attachShadow({ mode: 'open' });
+                super(...args);
+                if (!this.shadowRoot) {
+                    this.attachShadow({ mode: 'open' });
+                }
             }
         }
 
