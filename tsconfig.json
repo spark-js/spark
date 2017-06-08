@@ -1,13 +1,25 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "es2015",
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "jsx": "react",
+    "jsxFactory": "h",
     "sourceMap": true,
     "strict": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "typeRoots": [
+      "node_modules/@types"
+    ], 
     "experimentalDecorators": true
   },
-  "include": [
-    "webpack.config.ts"
+  "files": [
+    "src/index.ts"
   ],
   "exclude": [
     "node_modules"

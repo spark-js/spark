@@ -1,17 +1,14 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
-    "sourceMap": true,
-    "strict": true,
-    "experimentalDecorators": true,
-     "jsx": "react",
-    "jsxFactory": "h"
-  },
-  "include": [
-    "example.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": ".",
+        "declaration": false,
+        "paths": {
+            "spark": ["../lib"]
+        }
+    },
+    "files": [
+        "example.tsx"
+    ]
 }
