@@ -9,7 +9,10 @@
     "bundle": "webpack -p",
     "tsc": "tsc",
     "tsc:watch": "tsc -w",
-    "example": "webpack --config webpack.example.js"
+    "example": "webpack --config webpack.example.js",
+    "del": "del-cli \"lib\" \"dist\" \"example/bundle\"",
+    "pretsc": "npm run del",
+    "pretsc:watch": "npm run del"
   },
   "repository": {
     "type": "git",
@@ -21,12 +24,11 @@
     "url": "https://github.com/spark-js/spark/issues"
   },
   "homepage": "https://github.com/spark-js/spark#readme",
-  "dependencies": {
-   
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^7.0.23",
     "@types/webpack": "^2.2.15",
+    "del-cli": "^1.0.0",
     "ts-loader": "^2.1.0",
     "tslint": "^5.4.2",
     "typescript": "^2.3.4",

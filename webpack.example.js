@@ -7,7 +7,7 @@ module.exports = function webpackConfig(env = {}) {
         entry: './example/example.tsx',
         output: {
             filename: 'example.js',
-            path: path.resolve(__dirname, 'example'),
+            path: path.resolve(__dirname, 'example/bundle'),
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
