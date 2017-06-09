@@ -1,14 +1,15 @@
-import { CustomElement, h } from 'spark';
+import { CustomElement } from 'spark';
 @CustomElement('x-component')
 class MyComponent extends HTMLElement {
     name: string;
 
     get template() {
-        return (
-            <div>
-                {this.name}
-            </div>
-        )
+        // return (
+        //     <div>
+        //         {this.name}
+        //     </div>
+        // )
+        return '';
     }
 
     get styles() {
@@ -27,6 +28,3 @@ class MyComponent extends HTMLElement {
     }
 
 }
-
-// tslint:disable-next-line:no-unused-expression
-<MyComponent name="" />

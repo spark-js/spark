@@ -1,13 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = function webpackConfig(env = {}) {
     return {
         devtool: "source-map",
-        entry: './example/example.tsx',
+        entry: './dev/example.tsx',
         output: {
-            filename: 'example.js',
-            path: path.resolve(__dirname, 'example/bundle'),
+            filename: 'dev.js',
+            path: path.resolve(__dirname, 'dev/bundle'),
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
@@ -23,10 +24,23 @@ module.exports = function webpackConfig(env = {}) {
                 ],
                 loader: 'ts-loader',
                 options: {
-                    configFileName: './example/tsconfig.json'
+                    configFileName: './dev/tsconfig.json'
                 }
             }]
         },
-        plugins: []
+        devServer: {
+            contentBase: path.join(__dirname, 'dev'),
+            port: 9000,
+            overlay: true,
+            historyApiFallback: true
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: 'dev/index.html',
+                title: 'spark dev mode',
+                chunksSortMode: 'dependency',
+                inject: 'body'
+            }),
+        ]
     };
 }
