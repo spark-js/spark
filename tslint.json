@@ -45,12 +45,13 @@
     "no-debugger": true,
     "no-duplicate-super": true,
     "no-empty": false,
-    "no-empty-interface": true,
+    // "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    // "no-inferrable-types": [
+    //   true,
+    //   "ignore-params",
+    //   ""
+    // ],
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-shadowed-variable": true,

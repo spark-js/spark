@@ -1,15 +1,13 @@
-import { CustomElement } from 'spark';
+import { CustomElement, h } from 'spark';
 @CustomElement('x-component')
 class MyComponent extends HTMLElement {
-    name: string;
+    name: string = 'my name';
 
     get template() {
-        // return (
-        //     <div>
-        //         {this.name}
-        //     </div>
-        // )
-        return '';
+        return <div class='something'>
+            {this.name}
+            <span>Hello</span>
+        </div>
     }
 
     get styles() {
@@ -28,3 +26,5 @@ class MyComponent extends HTMLElement {
     }
 
 }
+
+console.log(new MyComponent().template);
