@@ -29,7 +29,8 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName?: st
 
             attributeChangedCallback(name: string, oldValue: string, newValue: string) {
                 // TODO (cammisuli): have a system to sync properties
-
+                // if a property is set on the dom, sync it to the internal property
+                (<any>this)[name] = newValue;
                 if (this._attached) {
                     // Re-render template whenever attributes change
                     this._dom = render(this.shadowRoot!, this.template, this._dom);

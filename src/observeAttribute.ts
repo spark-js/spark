@@ -5,7 +5,6 @@ export function ObserveAttribute(): PropertyDecorator {
         const ctor: ObservedAttributes = target.constructor as any;
         const observedAttrs = ctor.observedAttributes || [];
         observedAttrs.push(propertyKey);
-
         Object.defineProperty(
             ctor,
             'observedAttributes',
