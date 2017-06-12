@@ -1,18 +1,30 @@
-import { CustomElement, h } from 'spark';
+import { CustomElement, h, ObserveAttribute } from 'spark';
 
 
-@CustomElement('y-component')
+@CustomElement()
 class SecondComponent extends HTMLElement {
+
+    static get is() {
+        return 'y-component';
+    }
+
     get template() {
         return <div>
             this is my second component
-        </div>;
+        </div>
     }
 }
+customElements.define(SecondComponent.is, SecondComponent);
 
 
-@CustomElement('x-component')
+@CustomElement()
 class MyComponent extends HTMLElement {
+
+    static get is() {
+        return 'x-component'
+    }
+
+    @ObserveAttribute()
     name: string = 'Jonathan';
 
     get template() {
@@ -41,3 +53,4 @@ class MyComponent extends HTMLElement {
     }
 
 }
+customElements.define(MyComponent.is, MyComponent);

@@ -1,4 +1,5 @@
 import './declarations';
 
-export * from './component';
-export * from './vdom';
+export { CustomElement } from './component';
+export { ObserveAttribute } from './observeAttribute';
+export { h } from './vdom';

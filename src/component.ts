@@ -1,13 +1,15 @@
-import { render } from './vdom/render';
+import { createStyles } from './styles';
+import { VNode, render } from './vdom';
 import { HTMLElementConstructor } from './common/types';
 
-export function CustomElement<T extends HTMLElementConstructor>(elementName: string): ClassDecorator {
+export function CustomElement<T extends HTMLElementConstructor>(elementName?: string): ClassDecorator {
     return (target: T) => {
-        const CustomElement = class extends target {
-
-            static get is() {
-                return elementName;
-            }
+        return class extends target {
+            private _dom: VNode;
+            /**
+             * Checks to see if the custom element is already attached to the DOM
+             */
+            private _attached: boolean = false;
 
             /**
              *
@@ -20,12 +22,19 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
             }
 
             connectedCallback() {
-                render(this.shadowRoot!, this.template);
+                this.shadowRoot!.appendChild(createStyles(this.styles));
+                this._dom = render(this.shadowRoot!, this.template, this._dom);
+                this._attached = true;
+            }
+
+            attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+                // TODO (cammisuli): have a system to sync properties
+
+                if (this._attached) {
+                    // Re-render template whenever attributes change
+                    this._dom = render(this.shadowRoot!, this.template, this._dom);
+                }
             }
         }
-        // register element
-        window.customElements.define(elementName, CustomElement);
-
-        return CustomElement;
     }
 }
