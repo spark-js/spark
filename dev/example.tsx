@@ -24,7 +24,7 @@ class MyComponent extends HTMLElement {
         return 'x-component'
     }
 
-    @ObserveAttribute()
+    @ObserveAttribute(true)
     name: string = 'Jonathan';
 
     get template() {
@@ -50,6 +50,9 @@ class MyComponent extends HTMLElement {
 
     constructor() {
         super();
+        setTimeout(() => {
+            this.name = 'timedout';
+        })
     }
 
 }
