@@ -18,7 +18,10 @@ class MyComponent extends HTMLElement {
     lastname: string;
 
     @ObserveAttribute(true)
-    name: string = 'Jonathan';
+    name: string;
+
+    @ObserveAttribute(true)
+    checkedIn: boolean = false;
 
     get template() {
         return <div class='something'>
