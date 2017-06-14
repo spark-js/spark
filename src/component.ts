@@ -2,9 +2,14 @@ import { createStyles } from './styles';
 import { VNode, render } from './vdom';
 import { HTMLElementConstructor } from './common/types';
 
-export function CustomElement<T extends HTMLElementConstructor>(elementName?: string): ClassDecorator {
+export function CustomElement<T extends HTMLElementConstructor>(elementName: string): ClassDecorator {
     return (target: T) => {
-        return class extends target {
+        const CustomElement = class extends target {
+
+            static get is() {
+                return elementName;
+            }
+
             private _dom: VNode;
             /**
              * Checks to see if the custom element is already attached to the DOM
@@ -37,5 +42,7 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName?: st
                 }
             }
         }
+        window.customElements.define(elementName, CustomElement);
+        return CustomElement;
     }
 }

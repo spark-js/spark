@@ -4,7 +4,7 @@ export function render(parent: ShadowRoot, vnode: VNode, previous: VNode): VNode
     return updateElement(parent, vnode, previous);
 }
 
-function createNode(node: VNode | string) {
+function createNode(node: VNode | string = '') {
   if (typeof node === 'string') {
     return document.createTextNode(node);
   }

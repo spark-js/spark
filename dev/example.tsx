@@ -1,12 +1,8 @@
 import { CustomElement, h, ObserveAttribute } from 'spark';
 
 
-@CustomElement()
+@CustomElement('y-component')
 class SecondComponent extends HTMLElement {
-
-    static get is() {
-        return 'y-component';
-    }
 
     get template() {
         return <div>
@@ -14,15 +10,12 @@ class SecondComponent extends HTMLElement {
         </div>
     }
 }
-customElements.define(SecondComponent.is, SecondComponent);
 
-
-@CustomElement()
+@CustomElement('x-component')
 class MyComponent extends HTMLElement {
 
-    static get is() {
-        return 'x-component'
-    }
+    @ObserveAttribute()
+    lastname: string;
 
     @ObserveAttribute(true)
     name: string = 'Jonathan';
@@ -30,7 +23,7 @@ class MyComponent extends HTMLElement {
     get template() {
         return <div class='something'>
             {this.name}
-            <span>Hello<br /> {this.name}</span>
+            <span>Hello<br /> {this.name} {this.lastname}</span>
             <div>
                 <SecondComponent />
             </div>
@@ -54,6 +47,4 @@ class MyComponent extends HTMLElement {
             this.name = 'timedout';
         })
     }
-
 }
-customElements.define(MyComponent.is, MyComponent);
