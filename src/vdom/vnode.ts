@@ -1,5 +1,4 @@
 import { Is } from '../common';
-import { HTMLElementConstructor } from '../../lib/common/types';
 export class VNode {
 
     public children: Array<VNode | string>;
@@ -7,9 +6,7 @@ export class VNode {
     public attributes: Object | null;
 
     constructor(node: string | Is, attributes: Object = {}, ...children: Array<VNode | string>) {
-        this.type = typeof node == 'string' ? node : node.is;
-        this.children = children.map(child => {
-            return child ? child : '';
-        });
+        this.type = typeof node === 'string' ? node : node.is;
+        this.children = children.map(child => child ? child : '');
     }
 }
