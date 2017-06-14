@@ -5,12 +5,12 @@ export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyD
     return (target: { [key: string]: Object }, propertyKey: string) => {
         const ctor: ObservedAttributes = target.constructor as any;
         let observedAttrs = ctor.observedAttributes;
-        propertyKey = kebab(propertyKey);
+        const observedAttr = kebab(propertyKey);
         if (Array.isArray(observedAttrs)) {
-            observedAttrs.push(propertyKey);
+            observedAttrs.push(observedAttr);
         } else {
             observedAttrs = [];
-            observedAttrs.push(propertyKey);
+            observedAttrs.push(observedAttr);
             Object.defineProperty(
                 ctor,
                 'observedAttributes',
