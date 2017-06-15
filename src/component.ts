@@ -12,6 +12,7 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
             }
 
             private _dom: VNode;
+            private _rendering: boolean = false;
             /**
              * Checks to see if the custom element is already attached to the DOM
              */
@@ -29,7 +30,7 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
 
             connectedCallback() {
                 this.shadowRoot!.appendChild(createStyles(this.styles));
-                this._dom = render(this.shadowRoot!, this.template, this._dom);
+                this._render();
                 this._attached = true;
             }
 
@@ -43,7 +44,15 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
 
                 if (this._attached) {
                     // Re-render template whenever attributes change
+                    this._render();
+                }
+            }
+
+            _render() {
+                if (!this._rendering) {
+                    this._rendering = true;
                     this._dom = render(this.shadowRoot!, this.template, this._dom);
+                    this._rendering = false;
                 }
             }
         }
