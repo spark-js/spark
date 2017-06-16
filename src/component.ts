@@ -1,7 +1,6 @@
 import { createStyles } from './styles';
 import { VNode, render } from './vdom';
-import { HTMLElementConstructor } from './common/types';
-import { reverseKebab } from './common/utils';
+import { HTMLElementConstructor, reverseKebab, debounce } from './common';
 
 export function CustomElement<T extends HTMLElementConstructor>(elementName: string): ClassDecorator {
     return (target: T) => {
