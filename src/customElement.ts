@@ -18,7 +18,7 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
 
 export class Element<T> extends HTMLElement  {
     properties: Readonly<T>
-    public template: VNode | JSX.Element;
+    public template: VNode;
     public styles: string;
 
     private __dom: VNode;
@@ -69,3 +69,4 @@ export class Element<T> extends HTMLElement  {
         }
     }
 }
+
