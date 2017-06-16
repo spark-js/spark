@@ -49,6 +49,6 @@ class MyComponent extends HTMLElement {
         super();
         setTimeout(() => {
             this.name = 'timedout';
-        })
+        }, 1000)
     }
 }

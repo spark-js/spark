@@ -36,3 +36,22 @@ export function setAttribute(propertyKey: string, value: any, component: HTMLEle
         component.removeAttribute(attrName);
     }
 }
+
+export function debounce(func: Function, wait: number = 200, immediate?: boolean) {
+    let timeout: number | null;
+    return function () {
+        const context = this, args = arguments;
+        const later = function () {
+            timeout = null;
+            if (!immediate) {
+                func.apply(context, args);
+            }
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout!);
+        timeout = window.setTimeout(later, wait);
+        if (callNow) {
+            func.apply(context, args);
+        }
+    };
+};

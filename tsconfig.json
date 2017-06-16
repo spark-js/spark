@@ -10,6 +10,7 @@
     "jsxFactory": "h",
     "sourceMap": true,
     "strict": true,
+    "noImplicitThis": false,
     "declaration": true,
     "moduleResolution": "node",
     "outDir": "lib",

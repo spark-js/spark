@@ -9,7 +9,6 @@ export interface Renderer {
     styles: string;
 }
 export interface ObservedAttributes {
-    observedAttributes: string[]
-    _attrsToObserve: string[];
+    observedAttributes: string[];
 }
 

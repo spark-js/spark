@@ -5,17 +5,18 @@ import { HTMLElementConstructor, reverseKebab, debounce } from './common';
 export function CustomElement<T extends HTMLElementConstructor>(elementName: string): ClassDecorator {
     return (target: T) => {
         const CustomElement = class extends target {
-
             static get is() {
                 return elementName;
             }
 
-            private _dom: VNode;
-            private _rendering: boolean = false;
+            private __dom: VNode;
+            private __rendering: boolean = false;
             /**
              * Checks to see if the custom element is already attached to the DOM
              */
-            private _attached: boolean = false;
+            private __attached: boolean = false;
+
+            private __render: (immediate?: boolean) => () => void;
 
             /**
              *
@@ -25,12 +26,21 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
                 if (!this.shadowRoot) {
                     this.attachShadow({ mode: 'open' });
                 }
+
+                // assign debounce function with arguments to render.
+                this.__render = (immediate: boolean) => debounce(() => {
+                    if (!this.__rendering) {
+                        this.__rendering = true;
+                        this.__dom = render(this.shadowRoot!, this.template, this.__dom);
+                        this.__rendering = false;
+                    }
+                }, 50, immediate);
             }
 
             connectedCallback() {
                 this.shadowRoot!.appendChild(createStyles(this.styles));
-                this._render();
-                this._attached = true;
+                this.__render(true)();
+                this.__attached = true;
             }
 
             attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -41,17 +51,9 @@ export function CustomElement<T extends HTMLElementConstructor>(elementName: str
 
                 (<any>this)[reverseKebab(name)] = newValue;
 
-                if (this._attached) {
+                if (this.__attached) {
                     // Re-render template whenever attributes change
-                    this._render();
-                }
-            }
-
-            _render() {
-                if (!this._rendering) {
-                    this._rendering = true;
-                    this._dom = render(this.shadowRoot!, this.template, this._dom);
-                    this._rendering = false;
+                    this.__render()();
                 }
             }
         }
