@@ -1,7 +1,6 @@
-import { CustomElement, h, ObserveAttribute } from 'spark';
-
+import { CustomElement, Element, h, ObserveAttribute } from 'spark';
 @CustomElement('y-component')
-class SecondComponent extends HTMLElement {
+class SecondComponent extends Element<{}> {
 
     get template() {
         return <div>
@@ -11,7 +10,7 @@ class SecondComponent extends HTMLElement {
 }
 
 @CustomElement('x-component')
-class MyComponent extends HTMLElement {
+class MyComponent extends Element<{lastname: string}> {
 
     @ObserveAttribute()
     lastname: string;
