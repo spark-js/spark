@@ -6,13 +6,12 @@ declare global {
 
         }
 
-        // tslint:disable-next-line:no-empty-interface
         interface ElementClass {
             template: VNode
         }
 
         interface ElementAttributesProperty {
-            properties: any;
+            customAttributes: any;
         }
 
         interface SVGAttributes extends HTMLAttributes {
