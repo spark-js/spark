@@ -1,17 +1,13 @@
 import { CustomElement, h, ObserveAttribute } from 'spark';
-
-@CustomElement('y-component')
-class SecondComponent extends HTMLElement {
-
-    get template() {
-        return <div>
-            this is my second component
-        </div>
-    }
+import { SecondComponent } from './second-component';
+interface mycomponentProps {
+    lastname: string;
+    name: string;
+    checkedIn: boolean
 }
 
-@CustomElement('x-component')
-class MyComponent extends HTMLElement {
+
+export class MyComponent extends CustomElement<mycomponentProps>('x-component') {
 
     @ObserveAttribute()
     lastname: string;
@@ -20,14 +16,15 @@ class MyComponent extends HTMLElement {
     name: string;
 
     @ObserveAttribute(true)
-    checkedIn: boolean = false;
+    checkedIn: boolean;
 
     get template() {
         return <div class='something'>
             {this.name}
             <span>Hello<br /> {this.name} {this.lastname}</span>
             <div>
-                <SecondComponent />
+                <SecondComponent nameAgain="1" />
+                <input />
             </div>
         </div>
     }
@@ -51,4 +48,7 @@ class MyComponent extends HTMLElement {
             this.name = 'timedout';
         }, 1000)
     }
+
 }
+
+customElements.define(MyComponent.is, MyComponent);
