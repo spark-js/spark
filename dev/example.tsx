@@ -46,9 +46,11 @@ export class MyComponent extends CustomElement<mycomponentProps>('x-component') 
         super();
         setTimeout(() => {
             this.name = 'timedout';
-        }, 1000)
+        }, 1000) 
+        
     }
 
 }
 
 customElements.define(MyComponent.is, MyComponent);
+console.log(MyComponent.observedAttributes );

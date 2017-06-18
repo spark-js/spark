@@ -1,27 +1,13 @@
-import { ObservedAttributes } from './common';
+import { ICustomElement } from './common';
 import { kebab, setAttribute } from './common/utils';
 
 export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyDecorator {
     return (target: { [key: string]: Object }, propertyKey: string) => {
-        const ctor: ObservedAttributes = target.constructor as any;
+        const ctor: ICustomElement = target.constructor as any;
         let observedAttrs = ctor.observedAttributes;
         const observedAttr = kebab(propertyKey);
-        if (Array.isArray(observedAttrs)) {
-            observedAttrs.push(observedAttr);
-        } else {
-            observedAttrs = [];
-            observedAttrs.push(observedAttr);
-            Object.defineProperty(
-                ctor,
-                'observedAttributes',
-                {
-                    configurable: true,
-                    get() { return observedAttrs; }
-                }
-            );
-        }
-
-
+        observedAttrs.push(observedAttr);
+        
         let propertyValue = '';
         Object.defineProperty(target, propertyKey, {
             configurable: true,

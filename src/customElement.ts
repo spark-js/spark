@@ -1,17 +1,18 @@
 import { createStyles } from './styles';
 import { VNode, render } from './vdom';
-import { Constructor, debounce, reverseKebab } from './common';
+import { Constructor, debounce, ICustomElement, reverseKebab } from './common';
 
 
 const dom = Symbol('dom')
 
 export function CustomElement<props>(name: string) {
-    return class extends HTMLElement {
-        [key: string]: any;
+    const CustomElement = class extends HTMLElement {
         customAttributes: props
         static get is() {
             return name;
         }
+
+        static readonly observedAttributes: string[] = [];
 
         template: VNode;
         styles: string;
@@ -35,7 +36,7 @@ export function CustomElement<props>(name: string) {
             this.__render = (immediate: boolean) => debounce(() => {
                 if (!this.__rendering) {
                     this.__rendering = true;
-                    this[dom] = render(this.shadowRoot!, this.template, this[dom]);
+                    this.__dom = render(this.shadowRoot!, this.template, this.__dom);
                     this.__rendering = false;
                 }
             }, 50, immediate);
@@ -53,7 +54,7 @@ export function CustomElement<props>(name: string) {
                 return;
             }
 
-            this[reverseKebab(name)] = newValue;
+            (this as any)[reverseKebab(name)] = newValue;
 
             if (this.__attached) {
                 // Re-render template whenever attributes change
@@ -61,6 +62,6 @@ export function CustomElement<props>(name: string) {
             }
         }
     }
-
+    return CustomElement;
 }
 
