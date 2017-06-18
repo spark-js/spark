@@ -1,7 +1,8 @@
+import { setAttribute } from '../common';
 import { VNode } from './vnode';
 export function render(parent: ShadowRoot, vnode: VNode, previous: VNode): VNode {
-    console.log(parent, vnode);
-    return updateElement(parent, vnode, previous);
+  console.log(parent, vnode);
+  return updateElement(parent, vnode, previous);
 }
 
 function createNode(node: VNode | string) {
@@ -9,6 +10,7 @@ function createNode(node: VNode | string) {
     return document.createTextNode(node);
   }
   const element = document.createElement(node.type);
+  setAttributes(element, node.attributes);
   node.children
     .map(createNode)
     .forEach(element.appendChild.bind(element));
@@ -17,8 +19,8 @@ function createNode(node: VNode | string) {
 
 function changed(node1: VNode | string, node2: VNode | string): boolean {
   return typeof node1 !== typeof node2 ||
-         typeof node1 === 'string' && node1 !== node2 ||
-         (<VNode>node1).type !== (<VNode>node2).type
+    typeof node1 === 'string' && node1 !== node2 ||
+    (<VNode>node1).type !== (<VNode>node2).type
 }
 
 /**
@@ -43,6 +45,7 @@ function updateElement(parent: Node, newNode: VNode | string, oldNode: VNode | s
       parent.childNodes[index]
     );
   } else if ((<VNode>newNode).type) {
+    updateAttributes(parent.childNodes[index] as HTMLElement, (<VNode>newNode).attributes, (<VNode>oldNode).attributes);
     const newLength = (<VNode>newNode).children.length;
     const oldLength = (<VNode>oldNode).children.length;
     for (let i = 0; i < newLength || i < oldLength; i++) {
@@ -56,3 +59,17 @@ function updateElement(parent: Node, newNode: VNode | string, oldNode: VNode | s
   }
   return <VNode>newNode;
 }
+
+function setAttributes(element: HTMLElement, attributes: { [key: string]: string }) {
+  Object.keys(attributes).forEach(key => {
+    setAttribute(element, key, attributes[key]);
+  });
+}
+
+function updateAttributes(element: HTMLElement, newProps: { [key: string]: string }, oldProps: { [key: string]: string } = {}) {
+  const props = { ...newProps, ...oldProps };
+  Object.keys(props).forEach(name => {
+    setAttribute(element, name, props[name]);
+  });
+}
+

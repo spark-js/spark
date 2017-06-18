@@ -3,11 +3,11 @@ export class VNode {
 
     public children: Array<VNode | string>;
     public type: string;
-    public attributes: Object;
+    public attributes: {};
 
-    constructor(node: string | Is, attributes: Object, ...children: Array<VNode | string>) {
+    constructor(node: string | Is, attributes: {}, ...children: Array<VNode | string>) {
         this.type = typeof node === 'string' ? node : node.is;
-        this.attributes = attributes;
+        this.attributes = attributes || {};
         this.children = children.map(child => child ? child : '');
     }
 }

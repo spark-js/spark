@@ -22,18 +22,18 @@ export function reverseKebab(value: string): string {
     return value.replace(REVERSE_KEBAB_REGEX, (match) => match.slice(1).toUpperCase());
 }
 
-export function setAttribute(propertyKey: string, value: any, component: HTMLElement) {
+export function setAttribute(element: HTMLElement, propertyKey: string, value: any) {
     const attrName = kebab(propertyKey);
 
     if (typeof value === 'boolean') {
-        component.setAttribute(attrName, '' + value);
+        element.setAttribute(attrName, '' + value);
         return;
     }
 
     if (value) {
-        component.setAttribute(attrName, value);
+        element.setAttribute(attrName, value);
     } else {
-        component.removeAttribute(attrName);
+        element.removeAttribute(attrName);
     }
 }
 

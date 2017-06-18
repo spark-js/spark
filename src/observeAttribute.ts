@@ -31,7 +31,7 @@ export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyD
             set: function (value: any) {
                 propertyValue = value;
                 if (reflectToAttribute) {
-                    setAttribute(propertyKey, value, <HTMLElement>this);
+                    setAttribute(<HTMLElement>this, propertyKey, value);
                 }
                 if ((<any>this)._attached) {
                     (<any>this)._render();
