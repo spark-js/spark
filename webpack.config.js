@@ -25,6 +25,8 @@ module.exports = function webpackConfig(env = {}) {
                 }
             }]
         },
-        plugins: []
+        plugins: [
+            new webpack.optimize.ModuleConcatenationPlugin()
+        ]
     };
 }

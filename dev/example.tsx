@@ -1,13 +1,13 @@
 import { CustomElement, h, ObserveAttribute } from 'spark';
 import { SecondComponent } from './second-component';
-interface mycomponentProps {
+interface MycomponentProps {
     lastname: string;
     name: string;
     checkedIn: boolean
 }
 
 
-export class MyComponent extends CustomElement<mycomponentProps>('x-component') {
+export class MyComponent extends CustomElement<MycomponentProps>('x-component') {
 
     @ObserveAttribute()
     lastname: string;
@@ -23,7 +23,7 @@ export class MyComponent extends CustomElement<mycomponentProps>('x-component') 
             {this.name}
             <span>Hello<br /> {this.name} {this.lastname}</span>
             <div>
-                <SecondComponent nameAgain="1" />
+                <SecondComponent nameAgain='1' />
                 <input />
             </div>
         </div>
@@ -47,7 +47,6 @@ export class MyComponent extends CustomElement<mycomponentProps>('x-component') 
         setTimeout(() => {
             this.name = 'timedout';
         }, 1000) 
-        
     }
 
 }

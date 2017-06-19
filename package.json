@@ -7,12 +7,13 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "start": "npm run dev",
-    "bundle": "webpack -p",
+    "bundle": "webpack",
     "tsc": "tsc",
     "tsc:watch": "tsc -w",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "del": "del-cli \"lib\" \"dist\" \"dev/bundle\"",
     "pretsc": "npm run del",
+    "prebundle": "npm run del", 
     "pretsc:watch": "npm run del"
   },
   "repository": {
@@ -35,7 +36,7 @@
     "tslint": "^5.4.3",
     "typescript": "2.4",
     "uglifyjs-webpack-plugin": "^0.4.3",
-    "webpack": "^2.6.1",
+    "webpack": "^3.0.0",
     "webpack-dev-server": "^2.4.5"
   }
 }
