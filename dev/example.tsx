@@ -51,6 +51,4 @@ export class MyComponent extends CustomElement<mycomponentProps>('x-component') 
     }
 
 }
-
 customElements.define(MyComponent.is, MyComponent);
-console.log(MyComponent.observedAttributes );
