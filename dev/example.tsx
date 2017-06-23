@@ -58,7 +58,7 @@ export class MyComponent extends CustomElement<MycomponentProps>('x-component') 
     }
 
     setFirstName(event: KeyboardEvent) {
-        this.name = (event as any).composedPath()[0].value;
+        this.name = (event.composedPath()[0] as HTMLInputElement).value;
     }
 
 }
