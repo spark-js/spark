@@ -11,6 +11,7 @@ function createNode(node: VNode | string) {
   }
   const element = document.createElement(node.type);
   setAttributes(element, node.attributes);
+  addEventListeners(element, node.attributes);
   node.children
     .map(createNode)
     .forEach(element.appendChild.bind(element));
@@ -73,3 +74,21 @@ function updateAttributes(element: HTMLElement, newProps: { [key: string]: strin
   });
 }
 
+function isEventProp(name: string) {
+  return /^on/.test(name);
+}
+
+function extractEventName(name: string) {
+  return name.slice(2).toLowerCase();
+}
+
+function addEventListeners($target: HTMLElement, props: { [key: string]: any }) {
+  Object.keys(props).forEach(name => {
+    if (isEventProp(name)) {
+      $target.addEventListener(
+        extractEventName(name),
+        props[name]
+      );
+    }
+  });
+}

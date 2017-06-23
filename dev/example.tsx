@@ -21,10 +21,10 @@ export class MyComponent extends CustomElement<MycomponentProps>('x-component') 
     get template() {
         return <div class='something'>
             {this.name}
-            <span>Hello<br /> {this.name} {this.lastname}</span>
+            <span onClick={this.doSomething}>Hello<br /> {this.name} {this.lastname}</span>
             <div>
-                <SecondComponent nameAgain='1' />
-                <input />
+                <SecondComponent nameAgain='1' onMagic={(event) => this.doSomething(event)}/>
+                <input onKeyUp={(event) => this.setFirstName(event)} />
             </div>
         </div>
     }
@@ -47,6 +47,18 @@ export class MyComponent extends CustomElement<MycomponentProps>('x-component') 
         setTimeout(() => {
             this.name = 'timedout';
         }, 1000) 
+    }
+
+    doSomething(event: Event | CustomEvent) {
+        console.log(event);
+
+        if (event instanceof CustomEvent) {
+            this.name = event.detail;
+        }
+    }
+
+    setFirstName(event: KeyboardEvent) {
+        this.name = (event as any).composedPath()[0].value;
     }
 
 }
