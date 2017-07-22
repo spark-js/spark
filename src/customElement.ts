@@ -1,9 +1,10 @@
+import { debounce, reverseKebab, SparkElement, SparkElementDefinition } from './common';
 import { createStyles } from './styles';
-import { VNode, render } from './vdom';
-import { Constructor, debounce, ICustomElement, reverseKebab } from './common';
+import { render, VNode } from './vdom';
+
 
 export function CustomElement<props>(name: string) {
-    const CustomElement = class extends HTMLElement {
+    const CustomElement: SparkElementDefinition<props> = class extends HTMLElement implements SparkElement<props> {
         static readonly observedAttributes: string[] = [];
         static get is() {
             return name;
@@ -21,7 +22,7 @@ export function CustomElement<props>(name: string) {
          *
          */
         constructor(...args: any[]) {
-            super();
+            super(...args);
             if (!this.shadowRoot) {
                 this.attachShadow({ mode: 'open' });
             }

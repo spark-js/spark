@@ -1,5 +1,4 @@
-import { ICustomElement } from './common';
-import { kebab, setProperty } from './common/utils';
+import { kebab, setProperty, SparkElement, SparkElementDefinition } from './common';
 
 /**
  * When ObserveAttribute is added to a property in a custom element, 
@@ -11,7 +10,7 @@ import { kebab, setProperty } from './common/utils';
  */
 export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyDecorator {
     return (target: { [key: string]: Object }, propertyKey: string) => {
-        const ctor: ICustomElement = target.constructor as any;
+        const ctor: SparkElementDefinition = target.constructor as any;
         const observedAttrs = ctor.observedAttributes;
         const observedAttr = kebab(propertyKey);
         observedAttrs.push(observedAttr);
@@ -23,12 +22,13 @@ export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyD
                 return propertyValue;
             },
             set: function (value: any) {
+                const self: SparkElement<null> = this;
                 propertyValue = value;
-                if (reflectToAttribute) {
-                    setProperty(<HTMLElement>this, propertyKey, value);
-                }
-                if ((<any>this)._attached) {
-                    (<any>this)._render();
+                if (self.__attached) {
+                    if (reflectToAttribute) {
+                        setProperty(<HTMLElement>this, propertyKey, value);
+                    }
+                    self.__render();
                 }
             }
         })

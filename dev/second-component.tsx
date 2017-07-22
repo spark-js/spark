@@ -1,14 +1,18 @@
-import { CustomElement, h } from 'spark';
+import { CustomElement, h, ObserveAttribute } from 'spark';
 
 interface SecondProps {
     nameAgain: string;
     onMagic?: (data: Event) => void;
 }
 export class SecondComponent extends CustomElement<SecondProps>('y-component') implements SecondProps {
-    nameAgain: string = 'something';
+
+    @ObserveAttribute(true)
+    nameAgain = 'spark';
+
+    private _name: string = 'sparkjs';
     get template() {
         return <div onClick={() => this.doSomething()}>
-            this is my second component
+            this is my second component {this.nameAgain}
         </div>
     }
 
