@@ -1,7 +1,6 @@
-import { setAttribute } from '../common';
+import { setProperty, setProperties, updateProperties } from '../common';
 import { VNode } from './vnode';
 export function render(parent: ShadowRoot, vnode: VNode, previous: VNode): VNode {
-  console.log(parent, vnode);
   return updateElement(parent, vnode, previous);
 }
 
@@ -10,8 +9,7 @@ function createNode(node: VNode | string) {
     return document.createTextNode(node);
   }
   const element = document.createElement(node.type);
-  setAttributes(element, node.attributes);
-  addEventListeners(element, node.attributes);
+  setProperties(element, node.properties);
   node.children
     .map(createNode)
     .forEach(element.appendChild.bind(element));
@@ -46,7 +44,7 @@ function updateElement(parent: Node, newNode: VNode | string, oldNode: VNode | s
       parent.childNodes[index]
     );
   } else if ((<VNode>newNode).type) {
-    updateAttributes(parent.childNodes[index] as HTMLElement, (<VNode>newNode).attributes, (<VNode>oldNode).attributes);
+    updateProperties(parent.childNodes[index] as HTMLElement, (<VNode>newNode).properties, (<VNode>oldNode).properties);
     const newLength = (<VNode>newNode).children.length;
     const oldLength = (<VNode>oldNode).children.length;
     for (let i = 0; i < newLength || i < oldLength; i++) {
@@ -59,36 +57,4 @@ function updateElement(parent: Node, newNode: VNode | string, oldNode: VNode | s
     }
   }
   return <VNode>newNode;
-}
-
-function setAttributes(element: HTMLElement, attributes: { [key: string]: string }) {
-  Object.keys(attributes).forEach(key => {
-    setAttribute(element, key, attributes[key]);
-  });
-}
-
-function updateAttributes(element: HTMLElement, newProps: { [key: string]: string }, oldProps: { [key: string]: string } = {}) {
-  const props = { ...newProps, ...oldProps };
-  Object.keys(props).forEach(name => {
-    setAttribute(element, name, props[name]);
-  });
-}
-
-function isEventProp(name: string) {
-  return /^on/.test(name);
-}
-
-function extractEventName(name: string) {
-  return name.slice(2).toLowerCase();
-}
-
-function addEventListeners($target: HTMLElement, props: { [key: string]: any }) {
-  Object.keys(props).forEach(name => {
-    if (isEventProp(name)) {
-      $target.addEventListener(
-        extractEventName(name),
-        props[name]
-      );
-    }
-  });
 }

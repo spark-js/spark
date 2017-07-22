@@ -1,10 +1,18 @@
 import { ICustomElement } from './common';
-import { kebab, setAttribute } from './common/utils';
+import { kebab, setProperty } from './common/utils';
 
+/**
+ * When ObserveAttribute is added to a property in a custom element, 
+ * any changes made on the attribute (through DOM or setAttribute) are reflected back to the class property
+ * 
+ * When set to true, then any changes done on the property programmatically are reflected on the attribute
+ * 
+ * @param reflectToAttribute when true, reflect property changes to its attribute
+ */
 export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyDecorator {
     return (target: { [key: string]: Object }, propertyKey: string) => {
         const ctor: ICustomElement = target.constructor as any;
-        let observedAttrs = ctor.observedAttributes;
+        const observedAttrs = ctor.observedAttributes;
         const observedAttr = kebab(propertyKey);
         observedAttrs.push(observedAttr);
         
@@ -17,7 +25,7 @@ export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyD
             set: function (value: any) {
                 propertyValue = value;
                 if (reflectToAttribute) {
-                    setAttribute(<HTMLElement>this, propertyKey, value);
+                    setProperty(<HTMLElement>this, propertyKey, value);
                 }
                 if ((<any>this)._attached) {
                     (<any>this)._render();
