@@ -13,7 +13,7 @@
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "del": "del-cli \"lib\" \"dist\" \"dev/bundle\"",
     "pretsc": "npm run del",
-    "prebundle": "npm run del", 
+    "prebundle": "npm run del",
     "pretsc:watch": "npm run del"
   },
   "repository": {
@@ -34,7 +34,7 @@
     "html-webpack-plugin": "^2.28.0",
     "ts-loader": "^2.1.0",
     "tslint": "^5.4.3",
-    "typescript": "2.4",
+    "typescript": "^2.4.2",
     "uglifyjs-webpack-plugin": "^0.4.3",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.4.5"
