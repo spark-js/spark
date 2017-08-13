@@ -1,4 +1,4 @@
-import { setProperty, setProperties, updateProperties } from '../common';
+import { setProperties, updateProperties } from '../common';
 import { VNode } from './vnode';
 export function render(parent: ShadowRoot, vnode: VNode, previous: VNode): VNode {
   return updateElement(parent, vnode, previous);

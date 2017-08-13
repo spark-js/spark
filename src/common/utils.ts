@@ -23,19 +23,13 @@ export function reverseKebab(value: string): string {
 }
 
 /**
- * Used to set properties on the given element. If a propertyKey has `on`, this creates an event instead.
+ * Used to set attributes on the given element.
  * 
  * @param element HTMLElement to set attribute on
  * @param propertyKey name of the attribute
  * @param value value of the attribute
  */
-export function setProperty(element: HTMLElement, propertyKey: string, value: any) {
-    
-    if (isEventProp(propertyKey)) {
-        setEventListener(element, propertyKey, value);
-        return;
-    } 
-
+export function setAttribute(element: HTMLElement, propertyKey: string, value: any) {
     const attrName = kebab(propertyKey);
     if (typeof value === 'boolean') {
         element.setAttribute(attrName, '' + value);
@@ -51,14 +45,18 @@ export function setProperty(element: HTMLElement, propertyKey: string, value: an
 
 export function setProperties(element: HTMLElement, attributes: { [key: string]: string }) {
     Object.keys(attributes).forEach(key => {
-        setProperty(element, key, attributes[key]);
+        if (isEventProp(key)) {
+            setEventListener(element, key, attributes[key]);
+        } else {
+            setAttribute(element, key, attributes[key]);
+        }
     });
 }
 
 export function updateProperties(element: HTMLElement, newProps: { [key: string]: string }, oldProps: { [key: string]: string } = {}) {
     const props = { ...newProps, ...oldProps };
     Object.keys(props).forEach(name => {
-        setProperty(element, name, props[name]);
+        setAttribute(element, name, props[name]);
     });
 }
 
@@ -73,7 +71,7 @@ export function extractEventName(name: string) {
 export function setEventListener(element: HTMLElement, name: string, event: any) {
     element.addEventListener(
         extractEventName(name),
-        event
+        (event)
     );
 }
 

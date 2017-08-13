@@ -1,4 +1,4 @@
-import { kebab, setProperty, SparkElement, SparkElementDefinition } from './common';
+import { kebab, setAttribute, SparkElement, SparkElementDefinition } from './common';
 
 /**
  * When ObserveAttribute is added to a property in a custom element, 
@@ -26,7 +26,7 @@ export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyD
                 propertyValue = value;
                 if (self.__attached) {
                     if (reflectToAttribute) {
-                        setProperty(<HTMLElement>this, propertyKey, value);
+                        setAttribute(<HTMLElement>this, propertyKey, value);
                     }
                     self.__render();
                 }
