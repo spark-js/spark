@@ -1,5 +1,5 @@
 {
-  "name": "spark",
+  "name": "spark-js",
   "version": "0.0.0",
   "description": "",
   "main": "./dist/spark.umd.js",
