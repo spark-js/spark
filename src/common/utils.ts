@@ -55,8 +55,10 @@ export function setProperties(element: HTMLElement, attributes: { [key: string]:
 
 export function updateProperties(element: HTMLElement, newProps: { [key: string]: string }, oldProps: { [key: string]: string } = {}) {
     const props = { ...newProps, ...oldProps };
-    Object.keys(props).forEach(name => {
-        setAttribute(element, name, props[name]);
+    Object.keys(props).forEach(key => {
+        if (!isEventProp(key)) {
+            setAttribute(element, key, props[key]);
+        }
     });
 }
 
