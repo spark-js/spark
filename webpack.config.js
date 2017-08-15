@@ -1,12 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJs = require('uglifyjs-webpack-plugin');
 
 module.exports = function webpackConfig(env = {}) {
     return {
         entry: './src/index.ts',
         output: {
             filename: 'spark.umd.js',
-            path: path.resolve(__dirname, 'dist'),
+            path: path.resolve(__dirname, 'release', 'umd'),
             library: "spark",
             libraryTarget: "umd"
         },
@@ -26,7 +27,8 @@ module.exports = function webpackConfig(env = {}) {
             }]
         },
         plugins: [
-            new webpack.optimize.ModuleConcatenationPlugin()
+            new webpack.optimize.ModuleConcatenationPlugin(),
+            new UglifyJs()
         ]
     };
 }

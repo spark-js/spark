@@ -13,7 +13,7 @@
     "noImplicitThis": false,
     "declaration": true,
     "moduleResolution": "node",
-    "outDir": "lib",
+    "outDir": "release",
     "typeRoots": [
       // "node_modules/@types"
     ], 

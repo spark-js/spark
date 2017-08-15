@@ -1,5 +1,5 @@
-import './declarations';
+import './lib/declarations';
 
-export { CustomElement } from './customElement';
-export { ObserveAttribute } from './observeAttribute';
-export { h } from './vdom';
+export { CustomElement } from './lib/customElement';
+export { ObserveAttribute } from './lib/observeAttribute';
+export { h } from './lib/vdom';
