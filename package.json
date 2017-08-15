@@ -12,8 +12,8 @@
     "tsc:watch": "tsc -w",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "del": "del-cli \"lib\" \"dist\" \"dev/bundle\"",
-    "pretsc": "npm run del",
-    "prebundle": "npm run del",
+    "build": "npm run tsc && npm run bundle",
+    "prebuild": "npm run del",
     "pretsc:watch": "npm run del"
   },
   "repository": {
