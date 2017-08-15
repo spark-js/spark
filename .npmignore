@@ -2,10 +2,11 @@
 !/docs/
 !/dist/
 /src/
-.gitignore
+.vscode
 .release.json
 .editorconfig
 tsconfig.json
+tsconfig.bundle.json
 tslint.json
-webpack.config.json
+webpack.config.js
 webpack.dev.js
