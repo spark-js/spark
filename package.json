@@ -12,7 +12,7 @@
     "tsc:watch": "tsc -w",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "del": "del-cli \"release\"",
-    "build": "npm run tsc && npm run bundle && cp package.json release",
+    "build": "npm run tsc && npm run bundle && copy package.json release",
     "prebuild": "npm run del",
     "pretsc:watch": "npm run del",
     "release": "release-it -V"
@@ -31,6 +31,7 @@
   "devDependencies": {
     "@types/node": "^7.0.41",
     "@types/webpack": "^2.2.16",
+    "copy": "^0.3.0",
     "del-cli": "^1.0.0",
     "html-webpack-plugin": "^2.30.1",
     "release-it": "^2.8.5",

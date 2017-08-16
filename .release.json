@@ -1,5 +1,9 @@
 {
     "buildCommand": "npm run build",
+    "dist": {
+        "repo": false,
+        "baseDir": false
+    },
     "npm": {
         "publishPath": "./release",
         "tag": "latest"
