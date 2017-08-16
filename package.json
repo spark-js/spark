@@ -1,5 +1,5 @@
 {
-  "name": "spark-js",
+  "name": "spark.js",
   "version": "0.0.2",
   "description": "",
   "main": "./umd/spark.umd.js",
@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "bundle": "webpack",
     "tsc": "tsc",
-    "tsc:watch": "tsc -w",
+    "tsc:watch": "tsc -w", 
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "del": "del-cli \"release\"",
     "build": "npm run tsc && npm run bundle && copy package.json release",
