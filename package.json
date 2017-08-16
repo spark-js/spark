@@ -12,7 +12,7 @@
     "tsc:watch": "tsc -w",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "del": "del-cli \"release\"",
-    "build": "npm run tsc && npm run bundle && copy package.json release && copy README.md release",
+    "build": "npm run tsc && npm run bundle && copy package.json release && copy README.md release && copy LICENSE release",
     "prebuild": "npm run del",
     "pretsc:watch": "npm run del",
     "release": "release-it -V"
