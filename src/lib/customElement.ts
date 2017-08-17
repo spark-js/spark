@@ -4,7 +4,7 @@ import { render, VNode } from './vdom';
 
 
 export function CustomElement<props>(name: string) {
-    const CustomElement: SparkElementDefinition<props> = class extends HTMLElement implements SparkElement<props> {
+    const customElement: SparkElementDefinition<props> = class extends HTMLElement implements SparkElement<props> {
         static readonly observedAttributes: string[] = [];
         static get is() {
             return name;
@@ -57,6 +57,6 @@ export function CustomElement<props>(name: string) {
             }
         }
     }
-    return CustomElement;
+    return customElement;
 }
 
