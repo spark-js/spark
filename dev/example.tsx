@@ -1,4 +1,4 @@
-import { CustomElement, h, ObserveAttribute } from 'spark';
+import { CustomElement, h, ObserveAttribute } from 'spark.js';
 import { SecondComponent } from './second-component';
 interface MycomponentProps {
     lastname: string;

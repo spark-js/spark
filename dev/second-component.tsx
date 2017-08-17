@@ -1,4 +1,4 @@
-import { CustomElement, h, ObserveAttribute } from 'spark';
+import { CustomElement, h, ObserveAttribute } from 'spark.js';
 
 interface SecondProps {
     nameAgain: string;

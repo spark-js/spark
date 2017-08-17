@@ -13,7 +13,7 @@ module.exports = function webpackConfig(env = {}) {
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
             alias: {
-                spark: path.resolve(__dirname, 'src')
+                "spark.js": path.resolve(__dirname, 'src')
             }
         },
         module: {
