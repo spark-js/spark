@@ -243,9 +243,8 @@ Since spark.js is just a helper library for Web Components, all the standard Web
 
 For each of the below life cycles, you must call `super()` when providing your own functionality. This ensures that spark.js functionality get called whenever you provide your own functions.
 
-
 | Callback | Description |
-|--|--|--|--|
+|--|--|
 | connectedCallback() | Called every time the element is inserted into the DOM. Useful for running setup code, such as fetching resources or rendering. Generally, you should try to delay work until this time.|
 | disconnectedCallback() |	Called every time the element is removed from the DOM. Useful for running clean up code (removing event listeners, etc.).
 | attributeChangedCallback(attrName, oldVal, newVal) |	An attribute was added, removed, updated, or replaced. Also called for initial values when an element is created by the parser, or upgraded. Note: only attributes listed in the observedAttributes property will receive this callback. |
