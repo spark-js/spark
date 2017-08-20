@@ -188,6 +188,8 @@ When ObserveAttribute is added to a property in a spark.js component,
 any changes made on the attribute (through DOM or setAttribute) are reflected back to the class property
  
 When set to true, then any changes done on the property programmatically (eg. `querySelector('my-comp').property = 'test'`) are reflected on the attribute
+
+Whenever an property or attribute changes with `ObserveAttribute`, spark.js will update the DOM automatically. 
  
 ### `h`
 Function used to create a `VNode`
