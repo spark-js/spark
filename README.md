@@ -242,6 +242,8 @@ After configuring your transpiler of choice, you can then just use `jsx` to crea
 Since spark.js is just a helper library for Web Components, all the standard Web Component library events happen automatically. 
 
 For each of the below life cycles, you must call `super()` when providing your own functionality. This ensures that spark.js functionality get called whenever you provide your own functions.
+
+
 | Callback | Description |
 |--|--|--|--|
 | connectedCallback() | Called every time the element is inserted into the DOM. Useful for running setup code, such as fetching resources or rendering. Generally, you should try to delay work until this time.|
