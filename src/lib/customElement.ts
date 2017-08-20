@@ -2,7 +2,18 @@ import { debounce, reverseKebab, SparkElement, SparkElementDefinition } from './
 import { createStyles } from './styles';
 import { render, VNode } from './vdom';
 
-
+/**
+ * The base class that all Spark.js component inherit from. Takes 1 argument for the name of the component.
+ * 
+ * This sets static properties for better component management:
+ *  * `is` returns the name of the web component.
+ *  * `observedAttributes` returns all properties with `@ObserveAttribute` on them.
+ * 
+ * Components can override the `template` and `style` property.
+ *  * `template` must return `VNode` (jsx uses `h`).
+ *  * `styles` must return a string.
+ * @param name Name of web component. Must be hyphenated. 
+ */
 export function CustomElement<props>(name: string) {
     const customElement: SparkElementDefinition<props> = class extends HTMLElement implements SparkElement<props> {
         static readonly observedAttributes: string[] = [];

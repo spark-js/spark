@@ -8,18 +8,12 @@ spark.js
 
 A small library that takes the pain out of pure javascript (or typescript) web components.
 
-## Installation
-`
-npm install -S spark.js
-`
 ## What spark.js does
 Spark.js is primarily used to handle template updates and attribute changes, using only javascript/typescript. There are other libraries ([Polymer](https://www.polymer-project.org)), that help you maintain your templates and attributes, but does that only in HTML files. 
-<!-- Personally this feels weird and combersome to include Polymer components into an existing web application (Angular or React).  -->
 
  Spark.js uses `jsx` and decorators to create web components in a very React-like way.
 
- ## Usage
- Here is the most basic usage of spark.js
+ ## Code Sample
  ```jsx
 import { CustomElement, h } from 'spark.js';
 
@@ -32,7 +26,7 @@ class MyComponent extends CustomElement('my-component') {
 window.customElements.define(MyComponent.is, MyComponent);
  ```
 
-A little more advanced:
+Advanced:
 ```jsx
 import { CustomElement, h, ObserveAttribute } from 'spark.js';
 
@@ -67,8 +61,58 @@ window.customElements.define(Place.is, Place);
 
 ```
 
-### Events
-Spark.js does not have any kind of special event system, it uses browser built-in utilities, like `CustomEvent`.
+## Getting Started
+### Installation
+`
+npm install -S spark.js
+`
+
+### Configuration
+The bare minimum `tsconfig.json`. 
+```json
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "moduleResolution": "node",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "experimentalDecorators": true
+  }
+}
+```
+
+Here's a default `webpack.config.js` that you can use to get started.
+```javascript
+module.exports = {
+    entry: './spark-component.tsx',
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            }
+        ]
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js"]
+    },
+    output: {
+        filename: 'spark-component.js',
+        path: __dirname
+    }
+};
+```
+
+## Events
+Spark.js does not have any kind of special event system. You can use whatever kind of event system you want that work with Web Components. 
+
+There are few things to note when using spark.js components with events within each other:
 
 * Events must start with `on` and are optional in the component props. eg. `onCelebrate`
 * When dispatching an event, the event name must be what comes after `on`.
@@ -106,6 +150,87 @@ class Place extends CustomElement('place-comp') {
 window.customElements.define(Place.is, Place);
 ```
 
-## API
+## Top level APIs
+
+### `CustomElement`
+The base class that all spark.js component inherit from. Takes 1 argument for the name of the component.
+  
+This sets static properties for better component management:
+* `is` returns the name of the web component.
+* `observedAttributes` returns all properties with `@ObserveAttribute` on them. This is the same static property as standard Web Components.
+  
+Components can override the `template` and `style` property.
+* `template` must return `VNode`.
+* `styles` must return a string.
+
+```jsx
+class MyComponent extends CustomElement<props>('my-component') {
+
+    get template() {
+        return <div>Hi</div>
+    }
+
+    get styles() {
+        `
+        :host {
+            background-color: royalblue;
+        }
+        `
+    }
+}
+
+customElements.define(MyComponent.is, MyComponent)
+```
 
 
+### `ObserveAttribute`
+When ObserveAttribute is added to a property in a spark.js component, 
+any changes made on the attribute (through DOM or setAttribute) are reflected back to the class property
+ 
+When set to true, then any changes done on the property programmatically (eg. `querySelector('my-comp').property = 'test'`) are reflected on the attribute
+ 
+### `h`
+Function used to create a `VNode`
+
+```jsx
+...
+get template() {
+    return h('div', { disabled: false }, ['hello'])
+}
+...
+```
+
+If using Typescript you can specify to use `h` in `jsxFactory`. 
+```
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "moduleResolution": "node",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "experimentalDecorators": true
+  }
+}
+```
+
+Follow this [guide](https://babeljs.io/docs/plugins/transform-react-jsx/) to set up `h` with Babel. 
+
+If using `.babelrc ` use the following:
+```
+{
+  "plugins": [
+    ["transform-react-jsx", {
+      "pragma": "h" // default pragma is React.createElement
+    }]
+  ]
+}
+```
+
+For individual files, use `/** @jsx dom */`
+
+After configuring your transpiler of choice, you can then just use `jsx` to create `h` functions.

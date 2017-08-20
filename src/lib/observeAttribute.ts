@@ -1,7 +1,7 @@
 import { kebab, setAttribute, SparkElement, SparkElementDefinition } from './common';
 
 /**
- * When ObserveAttribute is added to a property in a custom element, 
+ * When ObserveAttribute is added to a property in a Spark.js element, 
  * any changes made on the attribute (through DOM or setAttribute) are reflected back to the class property
  * 
  * When set to true, then any changes done on the property programmatically are reflected on the attribute
