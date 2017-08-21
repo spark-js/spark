@@ -110,7 +110,7 @@ module.exports = {
 ```
 
 ## Events
-Spark.js does not have any kind of special event system. You can use whatever kind of event system you want that work with Web Components. 
+Spark.js does not have any kind of special event system. You can use whatever kind of event system you want that works with Web Components. 
 
 There are few things to note when using spark.js components with events within each other:
 
@@ -201,8 +201,8 @@ get template() {
 }
 ...
 ```
-
-If using Typescript you can specify to use `h` in `jsxFactory`. 
+#### Typescript
+If using Typescript you can specify to use `h` in the `jsxFactory` value in `tsconfig.json`. 
 ```
 {
   "compilerOptions": {
@@ -219,10 +219,10 @@ If using Typescript you can specify to use `h` in `jsxFactory`.
   }
 }
 ```
+#### Babel
+For Babel configuration, follow this [guide](https://babeljs.io/docs/plugins/transform-react-jsx/) to set up `h` with Babel. 
 
-Follow this [guide](https://babeljs.io/docs/plugins/transform-react-jsx/) to set up `h` with Babel. 
-
-If using `.babelrc ` use the following:
+Basically, if using `.babelrc ` use the following:
 ```
 {
   "plugins": [
@@ -234,6 +234,7 @@ If using `.babelrc ` use the following:
 ```
 
 For individual files, use `/** @jsx dom */`
+
 
 After configuring your transpiler of choice, you can then just use `jsx` to create `h` functions.
 
