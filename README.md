@@ -6,7 +6,7 @@
 spark.js
 =====
 
-A small library that takes the pain out of pure javascript (or typescript) web components.
+A small library that takes the pain out of pure javascript (or typescript) [web components](https://developers.google.com/web/fundamentals/architecture/building-components/customelements).
 
 ## What spark.js does
 Spark.js is primarily used to handle template updates and attribute changes, using only javascript/typescript. There are other libraries ([Polymer](https://www.polymer-project.org)), that help you maintain your templates and attributes, but does that only in HTML files. 
@@ -240,7 +240,7 @@ After configuring your transpiler of choice, you can then just use `jsx` to crea
 
 
 ## Life cycle
-Since spark.js is just a helper library for Web Components, all the standard Web Component library events happen automatically. 
+Since spark.js is just a helper library for Web Components, all the standard Web Component events happen automatically. 
 
 For each of the below life cycles, you must call `super()` when providing your own functionality. This ensures that spark.js functionality get called whenever you provide your own functions.
 
