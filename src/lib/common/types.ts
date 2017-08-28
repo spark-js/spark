@@ -37,6 +37,7 @@ export interface SparkElement<props> extends HTMLElement {
     __rendering: boolean;
     __attached: boolean;
     __render: (immediate?: boolean) => () => void;
+    __observe: { [key: string]: any };
 
     /**
      * Whenever the element is attached to the dom, `connectedCallback` will be triggered.

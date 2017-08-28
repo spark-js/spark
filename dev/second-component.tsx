@@ -2,6 +2,8 @@ import { CustomElement, h, ObserveAttribute } from 'spark.js';
 
 export interface SecondProps {
     nameAgain: string;
+
+    test: string;
     onMagic?: (data: Event) => void;
 }
 export class SecondComponent extends CustomElement<SecondProps>('y-component') implements SecondProps {
@@ -9,10 +11,12 @@ export class SecondComponent extends CustomElement<SecondProps>('y-component') i
     @ObserveAttribute(true)
     nameAgain = 'spark';
 
+    @ObserveAttribute()
+    test: string;
     private _name: string = 'sparkjs';
     get template() {
         return <div onClick={() => this.doSomething()}>
-            this is my second component {this.nameAgain}
+            this is my second component {this.nameAgain} {this.test}
         </div>
     }
 

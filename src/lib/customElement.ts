@@ -28,7 +28,7 @@ export function CustomElement<props>(name: string) {
         __rendering: boolean = false;
         __attached: boolean = false;
         __render: (immediate?: boolean) => () => void;
-
+        __observe: { [key: string]: any } = {};
         /**
          *
          */

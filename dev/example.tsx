@@ -25,7 +25,7 @@ export class MyComponent extends CustomElement<MycomponentProps>('x-component') 
             {this.name}
             <span onClick={this.doSomething}>Hello<br /> {this.name} {this.lastname}</span>
             {
-                this.items.map(item => <SecondComponent nameAgain={item.nameAgain} />)
+                this.items.map(item => <SecondComponent nameAgain={item.nameAgain} test={item.test} />)
             }
             <input onKeyUp={(event) => this.setFirstName(event)} />
         </div>
@@ -52,10 +52,12 @@ export class MyComponent extends CustomElement<MycomponentProps>('x-component') 
 
         this.items = [
             {
-                nameAgain: 'jonathan'
+                nameAgain: 'jonathan',
+                test: '2'
             },
             {
-                nameAgain: 'michelle'
+                nameAgain: 'michelle',
+                test: '3'
             }
         ]
     }

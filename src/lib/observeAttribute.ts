@@ -31,11 +31,12 @@ class Observe {
         Object.defineProperty(target, propertyKey, {
             configurable: true,
             get: function () {
-                return this.propertyValue;
+                const self: SparkElement<null> = this;                
+                return self.__observe[propertyKey];
             },
             set: function (value: any) {
                 const self: SparkElement<null> = this;
-                this.propertyValue = value;
+                self.__observe[propertyKey] = value;
                 if (self.__attached) {
                     if (reflectToAttribute) {
                         setAttribute(self, propertyKey, value);
