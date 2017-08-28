@@ -1,3 +1,4 @@
+import { flatten } from '../common/utils';
 import { SparkElementDefinition } from '../common';
 export class VNode {
 
@@ -8,6 +9,6 @@ export class VNode {
     constructor(node: string | SparkElementDefinition, properties: {}, ...children: Array<VNode | string>) {
         this.type = typeof node === 'string' ? node : node.is;
         this.properties = properties || {};
-        this.children = children.map(child => child ? child : '');
+        this.children = flatten(children);
     }
 }

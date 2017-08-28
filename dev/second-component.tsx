@@ -1,6 +1,6 @@
 import { CustomElement, h, ObserveAttribute } from 'spark.js';
 
-interface SecondProps {
+export interface SecondProps {
     nameAgain: string;
     onMagic?: (data: Event) => void;
 }

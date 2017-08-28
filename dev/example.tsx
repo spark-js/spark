@@ -1,5 +1,5 @@
 import { CustomElement, h, ObserveAttribute } from 'spark.js';
-import { SecondComponent } from './second-component';
+import { SecondComponent, SecondProps } from './second-component';
 interface MycomponentProps {
     lastname: string;
     name: string;
@@ -18,14 +18,16 @@ export class MyComponent extends CustomElement<MycomponentProps>('x-component') 
     @ObserveAttribute(true)
     checkedIn: boolean;
 
+    items: SecondProps[];
+
     get template() {
         return <div class='something'>
             {this.name}
             <span onClick={this.doSomething}>Hello<br /> {this.name} {this.lastname}</span>
-            <div>
-                <SecondComponent nameAgain='1' onMagic={(event) => this.doSomething(event)}/>
-                <input onKeyUp={(event) => this.setFirstName(event)} />
-            </div>
+            {
+                this.items.map(item => <SecondComponent nameAgain={item.nameAgain} />)
+            }
+            <input onKeyUp={(event) => this.setFirstName(event)} />
         </div>
     }
 
@@ -46,7 +48,16 @@ export class MyComponent extends CustomElement<MycomponentProps>('x-component') 
         super();
         setTimeout(() => {
             this.name = 'timedout';
-        }, 1000) 
+        }, 1000)
+
+        this.items = [
+            {
+                nameAgain: 'jonathan'
+            },
+            {
+                nameAgain: 'michelle'
+            }
+        ]
     }
 
     doSomething(event: Event | CustomEvent) {
