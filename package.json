@@ -1,6 +1,6 @@
 {
   "name": "spark.js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "./umd/spark.umd.js",
   "module": "./index.js",
