@@ -9,29 +9,40 @@ import { kebab, setAttribute, SparkElement, SparkElementDefinition } from './com
  * @param reflectToAttribute when true, reflect property changes to its attribute
  */
 export function ObserveAttribute(reflectToAttribute: boolean = false): PropertyDecorator {
-    return (target: { [key: string]: Object }, propertyKey: string) => {
+    return (target: SparkElement<null>, propertyKey: string) => {
         const ctor: SparkElementDefinition = target.constructor as any;
         const observedAttrs = ctor.observedAttributes;
         const observedAttr = kebab(propertyKey);
         observedAttrs.push(observedAttr);
-        
-        let propertyValue = '';
+        const observe = new Observe(target, propertyKey, reflectToAttribute);
+    }
+}
+
+class Observe {
+    propertyValue: string = '';
+    /**
+     * Internal class used to scope values for each property that has `@ObserveAttribute`
+     * 
+     * @param target SparkElement
+     * @param propertyKey property key to observe
+     * @param reflectToAttribute boolean to check if property changes to show on the element attribute
+     */
+    constructor(target: SparkElement<null>, propertyKey: string, reflectToAttribute: boolean) {
         Object.defineProperty(target, propertyKey, {
             configurable: true,
             get: function () {
-                return propertyValue;
+                return this.propertyValue;
             },
             set: function (value: any) {
                 const self: SparkElement<null> = this;
-                propertyValue = value;
+                this.propertyValue = value;
                 if (self.__attached) {
                     if (reflectToAttribute) {
-                        setAttribute(<HTMLElement>this, propertyKey, value);
+                        setAttribute(self, propertyKey, value);
                     }
                     self.__render();
                 }
             }
         })
-
     }
 }
