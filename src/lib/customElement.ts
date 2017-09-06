@@ -50,7 +50,7 @@ export function CustomElement<props>(name: string) {
 
         connectedCallback() {
             this.shadowRoot!.appendChild(createStyles(this.styles));
-            this.__render(true)();
+            this.rerender(true);
             this.__attached = true;
         }
 
@@ -64,8 +64,12 @@ export function CustomElement<props>(name: string) {
 
             if (this.__attached) {
                 // Re-render template whenever attributes change
-                this.__render()();
+                this.rerender();
             }
+        }
+
+        rerender(immediate: boolean = false) {
+            this.__render(immediate)();
         }
     }
     return customElement;

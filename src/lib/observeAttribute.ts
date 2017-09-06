@@ -41,7 +41,7 @@ class Observe {
                     if (reflectToAttribute) {
                         setAttribute(self, propertyKey, value);
                     }
-                    self.__render();
+                    self.rerender();
                 }
             }
         })

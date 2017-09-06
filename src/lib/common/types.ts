@@ -50,4 +50,9 @@ export interface SparkElement<props> extends HTMLElement {
      * Make sure to call the super implementation if overriding.
      */
     attributeChangedCallback?(name: string, oldvalue: any, newvalue: any): void
+
+    /** 
+     * Call this function to re-render the current template
+     */
+    rerender(): void;
 }
