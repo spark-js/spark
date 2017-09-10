@@ -38,7 +38,11 @@ export function setAttribute(element: HTMLElement, propertyKey: string, value: a
     }
 
     if (value) {
-        element.setAttribute(attrName, value);
+        if (propertyKey === 'class') {
+            element.classList.add(value);
+        } else {
+            element.setAttribute(attrName, value);
+        }
     } else {
         element.removeAttribute(attrName);
     }
