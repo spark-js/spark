@@ -22,24 +22,23 @@
     "url": "git+https://github.com/spark-js/spark.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/spark-js/spark/issues"
   },
   "homepage": "https://github.com/spark-js/spark#readme",
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^7.0.41",
     "@types/webpack": "^2.2.16",
     "copy": "^0.3.0",
     "del-cli": "^1.0.0",
     "html-webpack-plugin": "^2.30.1",
     "release-it": "^2.8.5",
-    "ts-loader": "2.3.1",
+    "ts-loader": "3.1.1",
     "tslint": "5.5",
-    "typescript": "2.4.2",
-    "uglifyjs-webpack-plugin": "^1.0.0-beta.2",
-    "webpack": "^3.5.4",
-    "webpack-dev-server": "2.6.1"
+    "typescript": "2.6.1",
+    "uglifyjs-webpack-plugin": "1.0.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "2.9.4"
   }
 }
